@@ -2,42 +2,54 @@
 <html lang="es">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Monitor Zigbee IoT</title>
-
+    <title>Monitor IoT</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
 </head>
 
 <body>
 
-    <header>
-        <h1>🌿 Sistema de Monitoreo Zigbee</h1>
-        <p>Terrario Inteligente IoT</p>
-    </header>
+<header>
+    <h1>🌿 Sistema IoT</h1>
+</header>
 
-    <div class="dashboard">
+<div class="dashboard">
 
-        <div class="card temperatura">
-            <h2>🌡️ Temperatura</h2>
-            <span>{{ datos.temperatura }} °C</span>
-        </div>
-
-        <div class="card humedad">
-            <h2>💧 Humedad</h2>
-            <span>{{ datos.humedad }} %</span>
-        </div>
-
-        <div class="card gas">
-            <h2>🌫️ Gas MQ-2</h2>
-            <span>{{ datos.gas }}</span>
-        </div>
-
-        <div class="card estado">
-            <h2>🟢 Estado</h2>
-            <span>Sistema Operativo</span>
-        </div>
-
+    <div class="card temperatura">
+        <h2>🌡️ Temperatura</h2>
+        <span id="temp">--</span> °C
     </div>
+
+    <div class="card humedad">
+        <h2>💧 Humedad</h2>
+        <span id="hum">--</span> %
+    </div>
+
+    <div class="card gas">
+        <h2>🌫️ Gas</h2>
+        <span id="gas">--</span>
+    </div>
+
+    <div class="card estado">
+        <h2>🟢 Estado</h2>
+        <span id="mov">--</span>
+    </div>
+
+</div>
+
+<script>
+async function actualizarDatos(){
+    const res = await fetch("/api/datos");
+    const data = await res.json();
+
+    document.getElementById("temp").innerText = data.temperatura;
+    document.getElementById("hum").innerText = data.humedad;
+    document.getElementById("gas").innerText = data.gas;
+    document.getElementById("mov").innerText = data.movimiento;
+}
+
+setInterval(actualizarDatos, 2000);
+actualizarDatos();
+</script>
 
 </body>
 </html>
