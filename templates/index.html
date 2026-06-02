@@ -9,7 +9,7 @@
 <body>
 
 <header>
-    <h1>🌿 Sistema IoT</h1>
+    <h1>🌿 Sistema IoT - Terrario Inteligente</h1>
 </header>
 
 <div class="dashboard">
@@ -24,13 +24,14 @@
         <span id="hum">--</span> %
     </div>
 
-    <div class="card gas">
-        <h2>🌫️ Gas</h2>
+    <div class="card gas" id="gasCard">
+        <h2>🌫️ Gas MQ-2</h2>
         <span id="gas">--</span>
+        <p id="alertaGas"></p>
     </div>
 
     <div class="card estado">
-        <h2>🟢 Estado</h2>
+        <h2>🚶 Movimiento</h2>
         <span id="mov">--</span>
     </div>
 
@@ -45,6 +46,19 @@ async function actualizarDatos(){
     document.getElementById("hum").innerText = data.humedad;
     document.getElementById("gas").innerText = data.gas;
     document.getElementById("mov").innerText = data.movimiento;
+
+    // 🚨 ALERTA GAS
+    const gas = data.gas;
+
+    if (gas > 500) {
+        document.getElementById("alertaGas").innerText = "⚠️ PELIGRO: GAS DETECTADO";
+        document.getElementById("gasCard").style.background = "rgba(255,0,0,0.2)";
+        document.getElementById("gasCard").style.border = "2px solid red";
+    } else {
+        document.getElementById("alertaGas").innerText = "✔ Normal";
+        document.getElementById("gasCard").style.background = "rgba(255,255,255,0.08)";
+        document.getElementById("gasCard").style.border = "1px solid rgba(255,255,255,0.15)";
+    }
 }
 
 setInterval(actualizarDatos, 2000);

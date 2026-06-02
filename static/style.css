@@ -7,61 +7,91 @@
 
 body{
     min-height:100vh;
-    background:linear-gradient(135deg,#0f172a,#1e293b);
+    background: radial-gradient(circle at top, #1e293b, #0f172a);
     color:white;
 }
 
+/* 🌿 HEADER MÁS MODERNO */
 header{
     text-align:center;
-    padding:30px;
+    padding:35px 20px;
 }
 
 header h1{
-    font-size:2.5rem;
+    font-size:2.8rem;
+    letter-spacing:1px;
+    font-weight:700;
 }
 
 header p{
     color:#94a3b8;
+    margin-top:8px;
 }
 
+/* 📊 DASHBOARD */
 .dashboard{
     width:90%;
     max-width:1200px;
-    margin:auto;
+    margin:40px auto;
 
     display:grid;
-    grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+    grid-template-columns:repeat(auto-fit,minmax(240px,1fr));
     gap:25px;
 }
 
+/* 🧩 CARD BASE */
 .card{
     padding:30px;
-    border-radius:20px;
+    border-radius:18px;
 
-    backdrop-filter:blur(10px);
+    background: rgba(255,255,255,0.06);
+    border: 1px solid rgba(255,255,255,0.12);
 
-    background:rgba(255,255,255,0.08);
+    box-shadow: 0 10px 30px rgba(0,0,0,0.35);
 
-    border:1px solid rgba(255,255,255,0.15);
+    transition: all 0.3s ease;
 
-    box-shadow:0 10px 25px rgba(0,0,0,0.3);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
 
-    transition:.3s;
+    position: relative;
+    overflow: hidden;
 }
 
+/* ✨ efecto brillo suave */
+.card::before{
+    content:"";
+    position:absolute;
+    top:-50%;
+    left:-50%;
+    width:200%;
+    height:200%;
+    background: radial-gradient(circle, rgba(255,255,255,0.08), transparent 60%);
+    transform: rotate(25deg);
+    pointer-events:none;
+}
+
+/* 🔥 hover más pro */
 .card:hover{
-    transform:translateY(-8px);
+    transform: translateY(-10px) scale(1.02);
+    box-shadow: 0 15px 40px rgba(0,0,0,0.5);
 }
 
+/* 🏷️ TITULOS */
 .card h2{
     margin-bottom:15px;
+    font-size:1.2rem;
+    color:#e2e8f0;
 }
 
+/* 📟 VALORES */
 .card span{
-    font-size:2rem;
+    font-size:2.2rem;
     font-weight:bold;
+    display:block;
 }
 
+/* 🎯 COLORES LATERALES */
 .temperatura{
     border-left:5px solid #ef4444;
 }
@@ -76,4 +106,28 @@ header p{
 
 .estado{
     border-left:5px solid #22c55e;
+}
+
+/* 🚨 ALERTA GAS */
+.gas.alerta{
+    background: rgba(255, 0, 0, 0.15) !important;
+    border-left:5px solid red !important;
+    animation: pulse 1s infinite;
+}
+
+@keyframes pulse{
+    0%{ transform: scale(1); }
+    50%{ transform: scale(1.02); }
+    100%{ transform: scale(1); }
+}
+
+/* 📱 RESPONSIVE MEJORADO */
+@media (max-width: 600px){
+    header h1{
+        font-size:2rem;
+    }
+
+    .card span{
+        font-size:1.8rem;
+    }
 }
