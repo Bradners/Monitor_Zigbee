@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Monitor Zigbee IoT</title>
+
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+
+<body>
+
+    <header>
+        <h1>🌿 Sistema de Monitoreo Zigbee</h1>
+        <p>Terrario Inteligente IoT</p>
+    </header>
+
+    <div class="dashboard">
+
+        <div class="card temperatura">
+            <h2>🌡️ Temperatura</h2>
+            <span>{{ datos.temperatura }} °C</span>
+        </div>
+
+        <div class="card humedad">
+            <h2>💧 Humedad</h2>
+            <span>{{ datos.humedad }} %</span>
+        </div>
+
+        <div class="card gas">
+            <h2>🌫️ Gas MQ-2</h2>
+            <span>{{ datos.gas }}</span>
+        </div>
+
+        <div class="card estado">
+            <h2>🟢 Estado</h2>
+            <span>Sistema Operativo</span>
+        </div>
+
+    </div>
+
+</body>
+</html>
